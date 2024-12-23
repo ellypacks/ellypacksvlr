@@ -1,20 +1,27 @@
 'use client';
 
 import React from 'react';
+import { Star, Users } from 'lucide-react';
+import HeroVideoPlayer from './ui/HeroVideoPlayer';
+import { useTranslations } from 'next-intl';
 
 interface HeroSectionProps {
     title: string;
     highlightedText: string;
     description: string;
     buttonText: string;
+    titleColor?: string;
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
     title,
     highlightedText,
     description,
-    buttonText
+    buttonText,
+    titleColor = 'text-[#2D3748]'
 }) => {
+    const t = useTranslations('packs.hero.stats');
+    
     const handleClick = () => {
         console.log("Button clicked");
         // Add your button click logic here
@@ -25,42 +32,39 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Left content */}
             <div className="flex-1 pr-8">
                 <h1 className="text-4xl font-bold mb-4">
-                    {title} <br />
-                    <span className="text-pink-500">{highlightedText}</span>
+                    <span className={titleColor}>{title}</span> <br />
+                    <span className="text-[#6B46C1]">{highlightedText}</span>
                 </h1>
-                <p className="text-gray-700 mb-8 text-lg">
+                <p className="text-[#2D3748] dark:text-gray-300 mb-8 text-lg">
                     {description}
                 </p>
                 <button
                     onClick={handleClick}
-                    className="bg-pink-500 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-pink-600 transition-colors duration-300 shadow-lg hover:shadow-xl"
+                    className="bg-[#F56565] text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-[#E53E3E] transition-colors duration-300 shadow-lg hover:shadow-xl"
                 >
                     {buttonText}
                 </button>
             </div>
 
             {/* Right content - Character placeholder */}
-            <div className="flex-1 relative">
-                <div className="w-full h-[400px] bg-gray-200 rounded-lg relative overflow-hidden">
-                    {/* Placeholder design */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-gray-400 text-center">
-                            <svg
-                                className="w-24 h-24 mx-auto mb-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                />
-                            </svg>
-                            <p className="text-lg font-medium">Character Illustration</p>
-                            <p className="text-sm">Place your character artwork here</p>
+            <div className="flex-1 flex flex-col items-center justify-center">
+                <div className="w-full max-w-md">
+                    <div className="relative pt-8">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-[#F56565]/25 via-[#6B46C1]/25 to-[#F56565]/25 rounded-3xl blur-xl"></div>
+                        <div className="absolute -inset-1 bg-gradient-to-r from-[#F56565]/15 via-[#6B46C1]/15 to-[#F56565]/15 rounded-3xl blur-2xl"></div>
+                        <div className="relative bg-white dark:bg-[#1A202C] rounded-3xl overflow-hidden shadow-xl border border-[#6B46C1]/10 dark:border-transparent transform hover:scale-[1.01] transition-all duration-300 hover:shadow-[#F56565]/20">
+                            <HeroVideoPlayer videoId="85yju1va4J8" />
+                        </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-center gap-4 mt-8 animate-fade-in-up">
+                        <div className="flex items-center gap-2 bg-white/10 dark:bg-white/5 px-4 py-2 rounded-full backdrop-blur-sm border border-[#6B46C1]/20">
+                            <Star className="w-5 h-5 text-[#F56565]" fill="currentColor" />
+                            <span className="text-[#2D3748] dark:text-white font-medium">{t('rating')}</span>
+                        </div>
+                        <div className="flex items-center gap-2 bg-white/10 dark:bg-white/5 px-4 py-2 rounded-full backdrop-blur-sm border border-[#6B46C1]/20">
+                            <Users className="w-5 h-5 text-[#F56565]" />
+                            <span className="text-[#2D3748] dark:text-white font-medium">{t('students')}</span>
                         </div>
                     </div>
                 </div>
