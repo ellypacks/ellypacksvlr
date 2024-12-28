@@ -2,6 +2,7 @@
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { notFound } from 'next/navigation';
 import Header from '@/components/ui/Header';
 import '../globals.css';
 
@@ -24,11 +25,17 @@ export function generateStaticParams() {
 }
 
 export default function RootLayout({ children, params: { locale } }: RootLayoutProps) {
+  if (locale !== 'en' && locale !== 'pt-BR') {
+    notFound();
+  }
+
   return (
     <html lang={locale}>
       <body className={inter.className}>
         <Header />
-        {children}
+        <main className="min-h-screen bg-white dark:bg-[#2D3748]">
+          {children}
+        </main>
       </body>
     </html>
   );
