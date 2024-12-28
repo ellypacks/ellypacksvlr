@@ -1,7 +1,3 @@
-const withNextIntl = require('next-intl/plugin')(
-  './src/i18n/request.ts'
-);
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
@@ -9,6 +5,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  trailingSlash: true,
 };
 
-module.exports = withNextIntl(nextConfig); 
+module.exports = nextConfig; 

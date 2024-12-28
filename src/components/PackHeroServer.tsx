@@ -1,22 +1,25 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
 import { ArrowRight } from 'lucide-react';
 import VideoPlayer from './VideoPlayer';
 
-const PackHero: React.FC = () => {
-  const t = useTranslations('pack.hero');
+interface PackHeroServerProps {
+  translations: {
+    title: string;
+    subtitle: string;
+    cta: string;
+  };
+}
 
+export default function PackHeroServer({ translations }: PackHeroServerProps) {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left content */}
         <div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-[#6B46C1]">{t('title')}</span>
+            <span className="text-[#6B46C1]">{translations.title}</span>
           </h1>
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#2D3748] dark:text-white">
-            {t('subtitle')}
+            {translations.subtitle}
           </h2>
           
           <div className="relative group mt-8">
@@ -27,7 +30,7 @@ const PackHero: React.FC = () => {
               rel="noopener noreferrer"
               className="relative inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#F56565] to-[#E53E3E] hover:from-[#E53E3E] hover:to-[#F56565] text-white font-bold py-4 px-8 rounded-full text-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-[#F56565]/20 group"
             >
-              <span>{t('cta')}</span>
+              <span>{translations.cta}</span>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-200" />
             </a>
           </div>
@@ -44,6 +47,4 @@ const PackHero: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default PackHero; 
+} 
