@@ -4,7 +4,11 @@ const withNextIntl = require('next-intl/plugin')(
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Your existing config
+  output: 'export',
+  basePath: '/ellypacksvlr',
+  images: {
+    unoptimized: true,
+  },
 };
 
 module.exports = withNextIntl(nextConfig); 
